@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Accessible enterprise dashboard demo">
+  <title>Enterprise Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="topbar">
+    <a class="brand" href="index.html" aria-label="Northstar dashboard home">Northstar</a>
+    <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="sidebar">Menu</button>
+    <div class="user-area"><span aria-hidden="true">●</span> Admin</div>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar" aria-label="Sidebar navigation">
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#overview" aria-current="page">Overview</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#reports">Reports</a></li>
+          <li><a href="#settings">Settings</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main id="main" class="main-content">
+      <section id="overview" aria-labelledby="page-title">
+        <div class="page-heading">
+          <div><p class="eyebrow">WORKSPACE / OVERVIEW</p><h1 id="page-title">Dashboard overview</h1>
+          <p class="muted">A clear view of your team's current performance.</p></div>
+          <button class="primary-button" id="open-dialog" type="button">Add project</button>
+        </div>
+
+        <div class="stats-grid" aria-label="Key performance indicators">
+          <article class="stat-card"><h2>Total revenue</h2><p class="stat-value">$84,254</p><p class="positive">↑ 12.8% <span class="muted">vs last month</span></p></article>
+          <article class="stat-card"><h2>Active projects</h2><p class="stat-value">24</p><p class="positive">↑ 3 <span class="muted">this month</span></p></article>
+          <article class="stat-card"><h2>Team members</h2><p class="stat-value">48</p><p class="muted">Across 6 teams</p></article>
+          <article class="stat-card"><h2>Tasks completed</h2><p class="stat-value">86%</p><p class="positive">↑ 4.2% <span class="muted">vs last month</span></p></article>
+        </div>
+      </section>
+
+      <section id="projects" class="panel" aria-labelledby="projects-title">
+        <div class="panel-heading"><div><h2 id="projects-title">Recent projects</h2><p class="muted">Track status and ownership.</p></div>
+          <label class="search-label" for="project-search">Search projects</label><input id="project-search" type="search" placeholder="Search projects…">
+        </div>
+        <div class="table-wrap">
+          <table>
+            <caption class="visually-hidden">Recent projects with owner, status, and due date</caption>
+            <thead><tr><th scope="col">Project</th><th scope="col">Owner</th><th scope="col">Status</th><th scope="col">Due date</th></tr></thead>
+            <tbody id="project-rows">
+              <tr><th scope="row">Website redesign</th><td>Olivia Chen</td><td><span class="status status-progress">In progress</span></td><td>Nov 12, 2026</td></tr>
+              <tr><th scope="row">Mobile application</th><td>Noah Patel</td><td><span class="status status-review">In review</span></td><td>Nov 18, 2026</td></tr>
+              <tr><th scope="row">Customer research</th><td>Amara Singh</td><td><span class="status status-done">Completed</span></td><td>Oct 20, 2026</td></tr>
+              <tr><th scope="row">Analytics platform</th><td>Lucas Martin</td><td><span class="status status-progress">In progress</span></td><td>Dec 02, 2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p id="search-status" class="muted" role="status" aria-live="polite"></p>
+      </section>
+
+      <section id="reports" class="panel" aria-labelledby="activity-title">
+        <h2 id="activity-title">Team activity</h2>
+        <article class="activity-item"><span class="avatar" aria-hidden="true">OC</span><div><p><strong>Olivia Chen</strong> updated Website redesign</p><p class="muted">20 minutes ago</p></div></article>
+        <article class="activity-item"><span class="avatar" aria-hidden="true">NP</span><div><p><strong>Noah Patel</strong> submitted a project for review</p><p class="muted">1 hour ago</p></div></article>
+        <article class="activity-item"><span class="avatar" aria-hidden="true">AS</span><div><p><strong>Amara Singh</strong> completed Customer research</p><p class="muted">Yesterday</p></div></article>
+      </section>
+
+      <section id="settings" class="panel" aria-labelledby="settings-title">
+        <h2 id="settings-title">Preferences</h2>
+        <form id="preferences-form">
+          <fieldset><legend>Email notifications</legend>
+            <label class="checkbox-label"><input type="checkbox" name="weekly-summary" checked> Send me a weekly summary</label>
+            <label class="checkbox-label"><input type="checkbox" name="project-updates"> Notify me about project updates</label>
+          </fieldset>
+          <button class="secondary-button" type="submit">Save preferences</button>
+          <p id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+      <footer class="footer"><p>© 2026 Northstar Workspace · Accessible dashboard demo</p></footer>
+    </main>
+  </div>
+
+  <dialog id="project-dialog" aria-labelledby="dialog-title">
+    <form id="project-form" method="dialog">
+      <div class="dialog-heading"><h2 id="dialog-title">Add a project</h2><button class="icon-button" id="close-dialog" type="button" aria-label="Close dialog">×</button></div>
+      <label for="project-name">Project name <span aria-hidden="true">*</span></label>
+      <input id="project-name" name="project-name" required minlength="2" maxlength="80" autocomplete="off">
+      <label for="project-owner">Project owner <span aria-hidden="true">*</span></label>
+      <input id="project-owner" name="project-owner" required minlength="2" maxlength="60" autocomplete="name">
+      <label for="project-due">Due date <span aria-hidden="true">*</span></label>
+      <input id="project-due" name="project-due" type="date" required>
+      <p id="dialog-error" class="error" role="alert"></p>
+      <div class="dialog-actions"><button class="secondary-button" id="cancel-dialog" type="button">Cancel</button><button class="primary-button" type="submit">Create project</button></div>
+    </form>
+  </dialog>
+</body>
+</html>
